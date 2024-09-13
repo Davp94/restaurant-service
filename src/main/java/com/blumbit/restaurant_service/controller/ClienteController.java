@@ -5,28 +5,36 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blumbit.restaurant_service.dto.request.ClienteRequestDto;
+import com.blumbit.restaurant_service.dto.response.ClienteResponseDto;
 import com.blumbit.restaurant_service.entity.Cliente;
 import com.blumbit.restaurant_service.repository.ClienteRepository;
+import com.blumbit.restaurant_service.service.IClienteService;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
+@RequestMapping("clientes")
 public class ClienteController {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private  IClienteService clienteService;
 
-
-    @GetMapping("clientes")
-    public List<Cliente> findAllClientes(){
-        return clienteRepository.findAll();
+    public ClienteController(IClienteService clienteService) {
+        this.clienteService = clienteService;
     }
 
-    @PostMapping("clientes")
-    public Cliente createCliente(@RequestBody Cliente cliente){
-        return clienteRepository.save(cliente);
+    @GetMapping()
+    public List<ClienteResponseDto> findAllClientes(){
+        return clienteService.findAllClientes();
+    }
+
+    @PostMapping()
+    public ClienteResponseDto createCliente(@RequestBody ClienteRequestDto ClienteRequestDto){
+        return clienteService.createCliente(ClienteRequestDto);
     }
 
 }
