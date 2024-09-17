@@ -2,14 +2,13 @@ package com.blumbit.restaurant_service.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blumbit.restaurant_service.dto.request.ClienteRequestDto;
 import com.blumbit.restaurant_service.dto.response.ClienteResponseDto;
-import com.blumbit.restaurant_service.entity.Cliente;
-import com.blumbit.restaurant_service.repository.ClienteRepository;
 import com.blumbit.restaurant_service.service.IClienteService;
+
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +32,7 @@ public class ClienteController {
     }
 
     @PostMapping()
-    public ClienteResponseDto createCliente(@RequestBody ClienteRequestDto ClienteRequestDto){
+    public ClienteResponseDto createCliente(@RequestBody @Valid ClienteRequestDto ClienteRequestDto){
         return clienteService.createCliente(ClienteRequestDto);
     }
-
 }
