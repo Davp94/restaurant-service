@@ -30,6 +30,7 @@ public class Cliente {
     private String nombre;
 
     @Column(nullable = false, length = 100, name = "cli_apellidos")
+
     private String apellidos;
 
     private String correo;

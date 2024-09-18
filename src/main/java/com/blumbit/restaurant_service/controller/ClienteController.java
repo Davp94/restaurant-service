@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blumbit.restaurant_service.common.CommonResponse;
 import com.blumbit.restaurant_service.dto.request.ClienteRequestDto;
 import com.blumbit.restaurant_service.dto.response.ClienteResponseDto;
 import com.blumbit.restaurant_service.service.IClienteService;
@@ -27,8 +28,8 @@ public class ClienteController {
     }
 
     @GetMapping()
-    public List<ClienteResponseDto> findAllClientes(){
-        return clienteService.findAllClientes();
+    public CommonResponse<List<ClienteResponseDto>> findAllClientes(){
+        return CommonResponse.success(clienteService.findAllClientes(), "operacion ejecutada exitosamente") ;
     }
 
     @PostMapping()
