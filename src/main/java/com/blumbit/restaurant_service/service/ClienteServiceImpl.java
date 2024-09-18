@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.blumbit.restaurant_service.common.MessageUtil;
 import com.blumbit.restaurant_service.dto.request.ClienteRequestDto;
 import com.blumbit.restaurant_service.dto.response.ClienteResponseDto;
 import com.blumbit.restaurant_service.entity.Cliente;
@@ -21,8 +22,11 @@ public class ClienteServiceImpl implements IClienteService{
 
     private final ClienteRepository clienteRepository;
 
-    public ClienteServiceImpl(ClienteRepository clienteRepository) {
+    private final MessageUtil messageUtil;
+
+    public ClienteServiceImpl(ClienteRepository clienteRepository, MessageUtil messageUtil) {
         this.clienteRepository = clienteRepository;
+        this.messageUtil = messageUtil;
     }
 
     @Override
@@ -31,11 +35,11 @@ public class ClienteServiceImpl implements IClienteService{
         try {
             clientes = clienteRepository.findAll();
             if(clientes.size() == 0){
-                throw new EmptyListException("No se encuentran datos");
+                throw new EmptyListException(messageUtil.getMessage("message.list.empty"));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            throw new RuntimeException("Error al devolver el listado de clientes");
+            throw new RuntimeException(messageUtil.getMessage("error.bad_request"));
         }
         return clientes.stream().map(ClienteResponseDto::buildFromEntity)
                 .collect(Collectors.toList());
