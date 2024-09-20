@@ -22,7 +22,8 @@ public class UserSecurityService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Cliente cliente = clientRepository.findOneByCorreo(username).orElseThrow(() -> new UsernameNotFoundException("usuario no encontrado"));
+        Cliente cliente = clientRepository.findByCorreo(username).orElseThrow(() -> new UsernameNotFoundException("usuario no encontrado"));
+        System.out.println(cliente);
         return User.builder()
                     .username(cliente.getCorreo())
                     .password(cliente.getPassword())
