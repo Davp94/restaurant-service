@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.blumbit.restaurant_service.common.MessageUtil;
@@ -22,10 +23,13 @@ public class ClienteServiceImpl implements IClienteService{
 
     private final ClienteRepository clienteRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     private final MessageUtil messageUtil;
 
-    public ClienteServiceImpl(ClienteRepository clienteRepository, MessageUtil messageUtil) {
+    public ClienteServiceImpl(ClienteRepository clienteRepository, MessageUtil messageUtil, PasswordEncoder passwordEncoder) {
         this.clienteRepository = clienteRepository;
+        this.passwordEncoder = passwordEncoder;
         this.messageUtil = messageUtil;
     }
 
@@ -48,7 +52,9 @@ public class ClienteServiceImpl implements IClienteService{
     @Override
     public ClienteResponseDto createCliente(ClienteRequestDto clienteRequestDto) {
         try {
-            Cliente cliente = clienteRepository.save(ClienteRequestDto.buildToEntity(clienteRequestDto));
+            Cliente clienteToCreate = ClienteRequestDto.buildToEntity(clienteRequestDto);
+            clienteToCreate.setPassword(passwordEncoder.encode(clienteToCreate.getPassword()));
+            Cliente cliente = clienteRepository.save(clienteToCreate);
             return ClienteResponseDto.buildFromEntity(cliente);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
