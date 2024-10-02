@@ -33,6 +33,8 @@ public class Plato {
 
     private String precio;
 
+    private String image;
+
     @ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Menu menu;
 
