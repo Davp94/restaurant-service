@@ -1,5 +1,9 @@
 package com.blumbit.restaurant_service.repository;
 
-public interface DetallePedidoRepository {
+import org.springframework.data.repository.ListCrudRepository;
+
+import com.blumbit.restaurant_service.entity.DetallePedido;
+
+public interface DetallePedidoRepository extends ListCrudRepository<DetallePedido, Integer> {
 
 }

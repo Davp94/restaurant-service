@@ -6,5 +6,5 @@ import com.blumbit.restaurant_service.dto.response.MenuResponseDto;
 
 public interface IMenuService {
 
-    List<MenuResponseDto> findAllByMenuId(Short menuId);
+    List<MenuResponseDto> findAllByMenuId(List<Short> menusId);
 }

@@ -5,14 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PlatoResponseDto {
-
+public class DetallePedidoResponseDto {
     private Integer id;
 
-    private String nombre;
+    private Short cantidad;
 
-    private String precio;
+    private Short subTotal;
 
-    private String image;
-
+    private PlatoResponseDto plato;
 }
