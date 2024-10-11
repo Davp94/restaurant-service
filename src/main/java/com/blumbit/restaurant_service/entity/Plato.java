@@ -1,5 +1,7 @@
 package com.blumbit.restaurant_service.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +33,7 @@ public class Plato {
 
     private String nombre;
 
-    private String precio;
+    private BigDecimal precio;
 
     private String image;
 

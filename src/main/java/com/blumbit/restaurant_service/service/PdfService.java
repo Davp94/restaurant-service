@@ -29,7 +29,7 @@ public class PdfService {
         this.pedidoService = pedidoService;
     }
 
-    private File generatePedidoPdf() {
+    private File generatePedidoPdf() throws IOException {
         Context context = getContextPedidoPdf();
         String html = loadAndFillTemplate(context);
         String xhtml = convertToXhtml(html);
