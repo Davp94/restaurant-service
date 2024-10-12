@@ -27,6 +27,8 @@ public class Menu {
 
     private String nombre;
 
+    private String descripcion;
+
     private Boolean active;
 
 }

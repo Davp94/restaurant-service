@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.blumbit.restaurant_service.dto.response.MenuResponseDto;
+import com.blumbit.restaurant_service.dto.response.PlatoResponseDto;
 import com.blumbit.restaurant_service.entity.Menu;
 import com.blumbit.restaurant_service.entity.Plato;
 import com.blumbit.restaurant_service.repository.MenuRepository;
@@ -28,15 +29,30 @@ public class MenuServiceImpl implements IMenuService {
         List<MenuResponseDto> menus = new ArrayList<>();
         for (Short menuId : menusIds) {
             Menu menuRetrieved = menuRepository.findByIdAndActive(menuId, true);
-            List<Plato> platosRetrieved = platoRepository.findByMenu_Id(menuId);
             MenuResponseDto menuResponse = new MenuResponseDto();
             menuResponse.setId(menuRetrieved.getId());
             menuResponse.setNombre(menuRetrieved.getNombre());
-            // TODO add platos builder method on dto
-            // menuResponse.setPlatos(platosRetrieved);
+            menuResponse.setDescripcion(menuRetrieved.getDescripcion());
             menus.add(menuResponse);
         }
         return menus;
+    }
+
+    @Override
+    public List<PlatoResponseDto> findAllPlatos() {
+        List<PlatoResponseDto> platos = new ArrayList<>();
+        List<Plato> platosRetrieved = platoRepository.findAll();
+        for (Plato plato : platosRetrieved) {
+            PlatoResponseDto platoResponse = new PlatoResponseDto();
+            platoResponse.setId(plato.getId());
+            platoResponse.setDescripcion(plato.getDescripcion());
+            platoResponse.setNombre(plato.getNombre());
+            platoResponse.setPrecio(plato.getPrecio());
+            platoResponse.setImage(plato.getImage());
+            platoResponse.setMenuId(plato.getMenu().getId());
+            platos.add(platoResponse);
+        }
+        return platos;
     }
 
 }

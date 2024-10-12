@@ -35,12 +35,14 @@ public class Plato {
 
     private BigDecimal precio;
 
+    private String descripcion;
+
     private String image;
 
     @ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Menu menu;
 
-    @OneToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Receta receta;
 
 }

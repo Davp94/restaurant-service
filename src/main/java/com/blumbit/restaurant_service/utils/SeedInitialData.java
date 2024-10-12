@@ -117,6 +117,8 @@ public class SeedInitialData implements CommandLineRunner{
         plato8.setImage("postgres.jpeg");
         plato8.setMenu(menusCreated.get(2));
 
+        platoRepository.saveAll(List.of(plato, plato2, plato3, plato4, plato5, plato6, plato7, plato8));
+
     }
 
 }

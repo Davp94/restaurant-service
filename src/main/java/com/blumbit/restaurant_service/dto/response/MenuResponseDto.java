@@ -13,5 +13,6 @@ public class MenuResponseDto {
 
     private String nombre;
 
-    private List<PlatoResponseDto> platos;
+    private String descripcion;
+
 }

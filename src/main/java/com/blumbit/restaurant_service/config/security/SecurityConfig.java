@@ -31,6 +31,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests(customRequest -> {
             customRequest.requestMatchers(HttpMethod.POST, "/user/login").permitAll();
             customRequest.requestMatchers(HttpMethod.POST, "/clientes").permitAll();
+            customRequest.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll();
+            customRequest.requestMatchers(HttpMethod.GET, "/api-docs/**").permitAll();
+            customRequest.requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll();
             customRequest.requestMatchers(HttpMethod.GET, "/images/**").permitAll()
                     .anyRequest()
                     .authenticated();
